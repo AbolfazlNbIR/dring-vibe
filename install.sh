@@ -1,17 +1,31 @@
 #!/bin/bash
 
-echo "Installing DringVibe..."
+echo "Installing DRING-VIBE..."
 
 sudo apt update
-sudo apt install python3-pip ffmpeg -y
+sudo apt install python3-pip python3-venv ffmpeg -y
 
-pip3 install -r requirements.txt
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
 
 chmod +x dringvibe.py
 
-sudo ln -sf $(pwd)/dringvibe.py /usr/local/bin/dringvibe
+sudo bash -c "cat > /usr/local/bin/dring-vibe" << EOF
+#!/bin/bash
+$(pwd)/venv/bin/python $(pwd)/dringvibe.py "$@"
+EOF
 
-echo "Done."
+sudo chmod +x /usr/local/bin/dring-vibe
+
+echo ""
+echo "=================================="
+echo "DRING-VIBE INSTALLED SUCCESSFULLY"
+echo "=================================="
+echo ""
 echo "Run with:"
-echo "dringvibe 1"
-echo "programmer : Abolfazl Nb"
+echo "dring-vibe 1"
+echo ""
+echo "Programmer : Abolfazl Nb"
