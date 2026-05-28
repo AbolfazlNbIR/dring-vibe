@@ -61,6 +61,7 @@ cd dring-vibe
 ## 📦 Install Dependencies
 
 ```bash
+chmod +x install.sh
 bash install.sh
 ```
 
